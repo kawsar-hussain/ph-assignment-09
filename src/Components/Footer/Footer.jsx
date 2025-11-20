@@ -28,18 +28,16 @@ const Footer = () => {
       </footer>
 
       {/* Bottom footer */}
-      <footer className="footer text-white border-t px-10 py-4">
+      <footer className="footer flex justify-between items-center text-white border-t px-10 py-4">
         <aside className="grid-flow-col items-center">
           <div className="bg-white rounded p-1">
-            <img src="/logo.png" alt="GreenNest Logo" className="w-[50px]" />
+            <img src="/logo.png" alt="GreenNest Logo" className="lg:w-[50px] w-[100px]" />
           </div>
           <div className="self-start ml-2">
             <p className="text-xl font-bold mb-1">GreenNest</p>
             <span className="text-gray-200">Selling plants and trees with care since 2010</span>
           </div>
         </aside>
-
-        {/* Social icons */}
         <nav className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
             <a>
@@ -57,9 +55,20 @@ const Footer = () => {
                 <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
               </svg>
             </a>
+            <a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current cursor-pointer">
+                <path d="M12 0C5.372 0 0 5.373 0 12c0 4.991 3.657 9.128 8.438 10.124-.117-.86-.223-2.183.046-3.125.242-.84 1.562-5.355 1.562-5.355s-.398-.796-.398-1.972c0-1.848 1.071-3.225 2.402-3.225 1.133 0 1.68.85 1.68 1.87 0 1.138-.723 2.842-1.096 4.421-.312 1.32.663 2.395 1.965 2.395 2.359 0 4.177-2.486 4.177-6.079 0-3.177-2.285-5.399-5.548-5.399-3.779 0-6.004 2.834-6.004 5.764 0 1.138.438 2.358.984 3.022.108.13.123.243.092.375-.1.406-.328 1.32-.375 1.504-.059.242-.195.293-.451.176-1.68-.783-2.734-3.24-2.734-5.215 0-4.244 3.086-8.144 8.906-8.144 4.672 0 8.305 3.332 8.305 7.782 0 4.648-2.93 8.391-6.995 8.391-1.367 0-2.656-.71-3.098-1.551l-.84 3.203c-.305 1.164-1.133 2.621-1.688 3.508C9.93 23.812 10.954 24 12 24c6.628 0 12-5.373 12-12S18.628 0 12 0z" />
+              </svg>
+            </a>
           </div>
         </nav>
       </footer>
+      <hr className="text-gray-200" />
+
+      <p className="text-gray-200 text-center py-5">
+        &copy; 2025 GreenNest.
+        <span className="block text-sm text-gray-300">All rights reserved.</span>
+      </p>
     </div>
   );
 };

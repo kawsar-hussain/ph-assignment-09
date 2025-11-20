@@ -71,15 +71,14 @@ const Header = () => {
                   <img src={`${user.photoURL}`} alt="user photo" className="w-10 h-10 object-cover rounded-full"></img> <div>{dropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
                 </div>
                 <div className="dropdown-content bg-[#e8ffe8] rounded-box z-1 p-3 shadow-sm w-[200px] whitespace-normal">
-                  <Link to="/profile">
-                    <img src={user.photoURL} alt="" className="m-auto w-[170px] h-[170px] object-cover rounded-full border-2 border-[#5fdf61]" />
-                    <p className="mt-2 text-xl font-bold wrap-break-word ">{user.displayName}</p>
+                  <Link to="/profile" className="mt-2 text-xl font-bold wrap-break-word ">
+                    {user.displayName}
                   </Link>
+                  <button onClick={handleLogOut} className="h-8 btn bg-[#00a700] text-white border-none hover:shadow-none mt-3">
+                    Logout
+                  </button>
                 </div>
               </div>
-            </button>
-            <button onClick={handleLogOut} className="h-8 btn bg-[#00a700] text-white border-none hover:shadow-none ">
-              Logout
             </button>
           </div>
         ) : (
