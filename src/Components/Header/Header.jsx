@@ -1,5 +1,8 @@
-import React from "react";
-import { Link, NavLink } from "react-router";
+import React, { use, useState } from "react";
+import { Link, Links, NavLink, useNavigate } from "react-router";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const li = (
@@ -15,6 +18,26 @@ const Header = () => {
       </li>
     </>
   );
+
+  const { user, logOut } = use(AuthContext);
+
+  const [dropdown, setDropdown] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDropdown = () => {
+    setDropdown(!dropdown);
+  };
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Successfully logged out.");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    navigate("/");
+  };
 
   return (
     <nav className="navbar bg-[#d4ffd5] shadow-sm lg:px-20 pl-1 px-5 sticky top-0 z-10">
@@ -38,8 +61,37 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 font-medium">{li}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+
+      <div className="navbar-end flex gap-1.5">
+        {user ? (
+          <div className="flex items-center gap-2">
+            <button onClick={handleDropdown} className="flex gap-2 bg-[#b1ffb1] btn shadow-none border-none h-12 px-2">
+              <div className="dropdown dropdown-bottom dropdown-end">
+                <div tabIndex={0} role="button" className="btn bg-transparent px-0 border-none">
+                  <img src={`${user.photoURL}`} alt="user photo" className="w-10 h-10 object-cover rounded-full"></img> <div>{dropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
+                </div>
+                <div className="dropdown-content bg-[#e8ffe8] rounded-box z-1 whitespace-nowrap p-3 shadow-sm w-[200px]">
+                  <Link to="/profile">
+                    <img src={user.photoURL} alt="" className="m-auto w-[170px] h-[170px] object-cover rounded-full border-2 border-[#5fdf61]" />
+                    <p className="mt-2 text-xl font-bold">{user.displayName}</p>
+                  </Link>
+                </div>
+              </div>
+            </button>
+            <button onClick={handleLogOut} className="h-8 btn bg-[#00a700] text-white border-none hover:shadow-none ">
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="">
+            <Link to="/auth/login" className="h-8 btn bg-transparent text-[#00a700] border-none hover:shadow-none">
+              Login
+            </Link>
+            <Link to="/auth/register" className="h-8 btn bg-transparent text-[#00a700] border-[#00a700] hover:shadow-none">
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );

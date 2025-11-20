@@ -12,13 +12,13 @@ const TopRatedPlants = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-gray-800 text-center my-12">
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-800 text-center my-12">
         <span className="border-b-4 border-[#00a700] pb-0.5">Top Rat</span>
         <span className="border-t-4 border-[#00a700] ">
           ed <span className=" text-[#00a700]">Plants</span>
         </span>
       </h2>
-      <div className="grid grid-cols-4 gap-5 px-20 mb-15">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 px-4 md:px-10 lg:px-20 mb-15">
         {plants
           .filter((plant) => plant.rating >= 4.5)
           .slice(0, 4)
