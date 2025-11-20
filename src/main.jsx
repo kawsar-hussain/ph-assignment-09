@@ -15,6 +15,7 @@ import AuthProvider from "./Provider/AuthProvider";
 import PrivateRoute from "./Provider/PrivateRoute";
 import Loader from "./Loader";
 import RedirectIfAuthenticated from "./Components/Authentication/RedirectIfAuthenticated";
+import Error404 from "./Error/Error404";
 
 // promise for plants section
 const plantsPromise = fetch("/plants.json").then((res) => res.json());
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error404></Error404>,
   },
 ]);
 

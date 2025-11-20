@@ -74,53 +74,63 @@ const Login = () => {
     const auth = getAuth(app);
     const email = emailRef.current.value;
     sendPasswordResetEmail(auth, email)
-      .then(() => toast.info("Please check your email."))
-      .catch((error) => console.log(error));
-    console.log(email);
+      .then(() => {
+        email ? toast.info("Password reset email sent! Check your inbox.") : "";
+      })
+      .catch((error) => {
+        console.log(error);
+        email === "" ? toast.info("Please enter your email.") : toast.info("Please enter a valid email.");
+      });
   };
 
   return (
     <div className="min-h-[700px] flex justify-center items-center bg-[url('https://images.unsplash.com/photo-1533460004989-cef01064af7e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170')] bg-cover bg-center px-4 md:px-0">
       <title>GreenNest - Login</title>
-      <div className="card w-full max-w-sm shrink-0 bg-[#d0ffd0] md:max-w-md">
-        <h2 className="text-center mt-5 font-bold text-gray-700 text-lg md:text-xl">Login Your Account </h2>
+      <div className="card w-full max-w-sm shrink-0 bg-[#78ff7800] backdrop-blur-xl shadow md:max-w-md">
+        <h2 className="text-center mt-5 font-bold text-white text-lg md:text-xl">Login Your Account </h2>
         <form onSubmit={handleLogin} className="card-body md:px-6">
           <fieldset className="fieldset *:w-full">
             {/* email */}
-            <label className="label text-sm md:text-base">Email</label>
-            <input type="email" name="email" className="input input-sm md:input-md" placeholder="Email" ref={emailRef} required />
+            <label className="label text-sm md:text-gray-100">Email</label>
+            <input type="email" name="email" className="input placeholder-gray-500 input-sm md:input-md" placeholder="Email" ref={emailRef} required />
             {/* password */}
-            <label className="label text-sm md:text-base">Password</label>
+            <label className="label text-sm md:text-gray-100">Password</label>
             <div className="relative w-full">
-              <input type={showPassword ? "text" : "password"} name="password" className="input input-bordered input-sm md:input-md w-full pr-10" placeholder="Password" required />
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                className="input placeholder-gray-500 input-bordered input-sm md:input-md w-full pr-10 "
+                placeholder="Password"
+                required
+              />
               {/* Toggle Icon */}
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-[14px] md:text-[16px] hover:text-gray-700">
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             <div onClick={handleForgetPassword}>
-              <a className="link link-hover text-sm md:text-base">Forgot password?</a>
+              <a className="link link-hover text-sm md:text-gray-100">Forgot password?</a>
             </div>
             {error && <p className="text-red-500 text-xs md:text-sm">{error}</p>}
             <button type="submit" className="btn btn-neutral mt-4 bg-[#00a700] text-white border-none shadow-none btn-sm md:btn-md">
               Login
             </button>
           </fieldset>
-          <p className="text-center mt-2 text-sm md:text-base">
-            Don't have an account?{" "}
-            <Link to="/auth/register" className="text-[#00a700]  font-medium">
+          <p className="text-center text-gray-100 mt-2 text-sm md:text-base">
+            Don't have an account? {""}
+            <Link to="/auth/register" className="text-[#97ff97] underline  font-medium">
               Register
             </Link>
           </p>
         </form>
         <div className="card-body pt-0 md:px-6">
           <div className="flex items-center gap-2">
-            <hr className="flex-1 border-gray-300" />
-            <span className="text-gray-500 text-center text-xs md:text-sm">or</span>
-            <hr className="flex-1 border-gray-300" />
+            <hr className="flex-1 border-gray-200" />
+            <span className="text-gray-200 text-center text-xs md:text-sm">or</span>
+            <hr className="flex-1 border-gray-200" />
           </div>
 
-          <button className="btn bg-white text-black border-[#e5e5e5]" onClick={handleGoogleLogin}>
+          <button className="btn bg-white text-black shadow-none border-[#e5e5e5] h-9" onClick={handleGoogleLogin}>
             <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <g>
                 <path d="m0 0H512V512H0" fill="#fff"></path>

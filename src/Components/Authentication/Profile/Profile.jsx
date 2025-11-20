@@ -1,5 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const { user, updateUser, setUser } = use(AuthContext);
@@ -42,16 +43,18 @@ const Profile = () => {
         {editing ? (
           <div className=" flex flex-col w-[250px] md:w-[300px]">
             <label className="label text-xs md:text-sm mb-1">Photo URL</label>
-            <input type="text" value={photo} onChange={handlePhotoChange} placeholder="photo URL" className="input input-sm md:input-md" />
+            <input type="text" value={photo} onChange={handlePhotoChange} placeholder="photo URL" className="input placeholder-gray-500 input-sm md:input-md" />
           </div>
         ) : (
-          <img src={user.photoURL} alt="user photo" className="w-[350px] h-[350px] md:w-[300px] md:h-[300px] object-cover rounded-full border-4 border-[#5fdf61]" />
+          <div className="flex justify-center">
+            <img src={user.photoURL} alt="user photo" className=" w-[350px] h-[350px] md:w-[300px] md:h-[300px] object-cover rounded-full border-4 border-[#5fdf61]" />
+          </div>
         )}
 
         {editing ? (
           <div className="mt-2 flex flex-col w-[250px] md:w-[300px]">
             <label className="label text-xs md:text-sm mb-1">Name</label>
-            <input type="text" value={name} onChange={handleNameChange} placeholder="Your Name" className="input input-sm md:input-md" />
+            <input type="text" value={name} onChange={handleNameChange} placeholder="Your Name" className="input placeholder-gray-500 input-sm md:input-md" />
           </div>
         ) : (
           <p className="mt-4 text-xl md:text-2xl font-bold">{user.displayName}</p>
@@ -64,6 +67,7 @@ const Profile = () => {
             onClick={() => {
               if (editing) {
                 saveProfile();
+                toast.success("Profile updated successfully.");
               } else {
                 setEditing(true);
               }
